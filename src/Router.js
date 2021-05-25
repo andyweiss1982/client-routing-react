@@ -38,10 +38,10 @@ export const Router = ({ children }) => {
 
 export const useRouter = () => {
   const { location } = useContext(LocationContext);
+  const locationParts = location.split('/');
 
   for (const [path, Page] of Object.entries(routes)) {
     const pathParts = path.split('/');
-    const locationParts = location.split('/');
 
     if (
       pathParts.every(
