@@ -39,7 +39,7 @@ export const Router = ({ children }) => {
 export const useRouter = () => {
   const { location } = useContext(LocationContext);
 
-  for (const [path, Component] of Object.entries(routes)) {
+  for (const [path, Page] of Object.entries(routes)) {
     const pathParts = path.split('/');
     const locationParts = location.split('/');
 
@@ -59,7 +59,7 @@ export const useRouter = () => {
         }),
         {}
       );
-      return <Component {...params} />;
+      return <Page {...params} />;
     }
   }
 
