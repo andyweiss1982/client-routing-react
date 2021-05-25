@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, Link } from './Router';
 import './style.css';
 
+
 export default function App() {
   const page = useLocation();
   return (
