@@ -1,5 +1,6 @@
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -11,27 +12,22 @@ import NotFound from './pages/NotFound';
 
 const LocationContext = createContext({
   location: window.location.pathname,
-  setLocation: () => {}
+  navigate: () => {}
 });
 
 export const Router = ({ children }) => {
-  const [location, setLocation] = useState(window.location.pathname);
+  const [location, navigate] = useState(window.location.pathname);
+
+  const handlePopState = useCallback(() => navigate(window.location.pathname), [
+    navigate
+  ]);
 
   useEffect(() => {
     window.addEventListener('popstate', handlePopState);
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, []);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [handlePopState]);
 
-  const handlePopState = () => {
-    setLocation(window.location.pathname);
-  };
-
-  const value = useMemo(() => ({ location, setLocation }), [
-    location,
-    setLocation
-  ]);
+  const value = useMemo(() => ({ location, navigate }), [location, navigate]);
 
   return (
     <LocationContext.Provider value={value}>
@@ -40,14 +36,13 @@ export const Router = ({ children }) => {
   );
 };
 
-export const useLocation = () => {
+export const useRouter = () => {
   const { location } = useContext(LocationContext);
+
   for (const [path, Component] of Object.entries(routes)) {
-    if (location === path) {
-      return <Component />;
-    }
     const pathParts = path.split('/');
     const locationParts = location.split('/');
+
     if (
       pathParts.every(
         (part, index) =>
@@ -67,15 +62,17 @@ export const useLocation = () => {
       return <Component {...params} />;
     }
   }
+
   return <NotFound />;
 };
 
 export const Link = ({ to, children }) => {
-  const { location, setLocation } = useContext(LocationContext);
+  const { location, navigate } = useContext(LocationContext);
+
   const handleClick = event => {
     event.preventDefault();
     window.history.pushState({}, '', to);
-    setLocation(to);
+    navigate(to);
   };
 
   return (
