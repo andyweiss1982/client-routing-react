@@ -1,22 +1,14 @@
 import React from 'react';
-import { Link, useRouter } from './Router';
+
+import LocationContextProvider from './context/LocationContext';
+import Layout from './components/Layout';
+
 import './style.css';
 
-const App = () => {
-  const page = useRouter();
-  return (
-    <>
-      <header>
-        <nav>
-          <Link to="/">All Todos</Link>
-          <Link to="/todos/1">Todo 1</Link>
-          <Link to="/todos/2">Todo 2</Link>
-          <Link to="/bananas">Go Bananas</Link>
-        </nav>
-      </header>
-      <main>{page}</main>
-    </>
-  );
-};
+const App = () => (
+  <LocationContextProvider>
+    <Layout />
+  </LocationContextProvider>
+);
 
 export default App;
