@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { LocationContext } from '../context/LocationContext';
+import Redirect from '../components/Redirect';
 import NotFound from '../pages/NotFound';
 
 export const useRouter = routes => {
@@ -15,6 +16,7 @@ export const useRouter = routes => {
         return pathPart === locationPart || pathPart.startsWith(':');
       })
     ) {
+      if (typeof Page === 'string') return <Redirect to={Page} />;
       const params = pathParts.reduce(
         (result, pathPart, index) => ({
           ...result,
