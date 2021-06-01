@@ -8,20 +8,20 @@ header {
   padding: 1rem;
 }
 
-nav {
+header nav {
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
 
-main {
-  text-align: center;
-}
-
-a {
+header a {
   color: white;
 }
 
-a.active {
+header a.active {
   color: hotpink;
+}
+
+main {
+  text-align: center;
 }
