@@ -1,8 +1,8 @@
-import AllTodos from './pages/AllTodos';
-import SingleTodo from './pages/SingleTodo';
+import AllItems from './pages/AllItems';
+import SingleItem from './pages/SingleItem';
 
 // all matches must be exact except for named parameters
 export const routes = {
-  '/': AllTodos,
-  '/todos/:id': SingleTodo
+  '/': AllItems,
+  '/items/:id': SingleItem
 };

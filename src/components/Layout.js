@@ -8,9 +8,9 @@ const Layout = () => (
   <>
     <header>
       <nav>
-        <Link to="/">All Todos</Link>
-        <Link to="/todos/1">Todo 1</Link>
-        <Link to="/todos/2">Todo 2</Link>
+        <Link to="/">All Items</Link>
+        <Link to="/items/1">Item 1</Link>
+        <Link to="/items/2">Item 2</Link>
         <Link to="/bananas">Go Bananas</Link>
       </nav>
     </header>

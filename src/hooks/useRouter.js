@@ -11,7 +11,7 @@ export const useRouter = routes => {
     if (
       locationParts.length === pathParts.length &&
       locationParts.every((locationPart, index) => {
-        const pathPart = locationParts[index];
+        const pathPart = pathParts[index];
         return pathPart === locationPart || pathPart.startsWith(':');
       })
     ) {
